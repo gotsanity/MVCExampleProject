@@ -19,12 +19,7 @@ namespace MVCExampleProject.Models
                 )
             {
                 // are we already populated?
-                if (context.Todos.Any())
-                {
-                    return;
-                }
-
-                if (context.Comments.Any())
+                if (context.Todos.Any() || context.Comments.Any())
                 {
                     return;
                 }
