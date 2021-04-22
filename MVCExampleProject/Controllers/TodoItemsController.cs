@@ -11,7 +11,7 @@ using MVCExampleProject.Models;
 
 namespace MVCExampleProject.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = "ColorPref")]
     public class TodoItemsController : Controller
     {
         private readonly TodoContext _context;
@@ -25,6 +25,7 @@ namespace MVCExampleProject.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [AllowAnonymous]
         // GET: TodoItems
         public IActionResult Index()
         {

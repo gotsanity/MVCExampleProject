@@ -1,8 +1,24 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var claims = User.Claims.ToList();
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h1 class="display-4">Welcome @User.Identity.Name</h1>
+        <h3>@(User.FindFirst("ForFun")).Value</h3>
+    }
+    else
+    {
+        <h1 class="display-4">Welcome</h1>
+    }
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<ul>
+@foreach (var claim in claims)
+        {
+            <li>@claim</li>
+        }
+</ul>

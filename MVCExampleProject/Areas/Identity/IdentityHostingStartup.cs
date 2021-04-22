@@ -20,8 +20,15 @@ namespace MVCExampleProject.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("IdentityContextConnection")));
 
+                services.AddAuthorization(options =>
+                {
+                    //options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Role"));
+                    options.AddPolicy("ColorPref", policy => policy.RequireClaim("FavColor", "Green", "Red"));
+                });
+
                 services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                    .AddEntityFrameworkStores<IdentityContext>();
+                    .AddEntityFrameworkStores<IdentityContext>()
+                    .AddClaimsPrincipalFactory<AppClaimsFactory>();
             });
         }
     }

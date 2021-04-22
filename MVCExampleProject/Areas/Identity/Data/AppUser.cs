@@ -9,6 +9,7 @@ namespace MVCExampleProject.Areas.Identity.Data
     // Add profile data for application users by adding properties to the AppUser class
     public class AppUser : IdentityUser
     {
+        public bool IsAdmin { get; set; }
         [PersonalData]
         public string FavColor { get; set; }
         [PersonalData]
