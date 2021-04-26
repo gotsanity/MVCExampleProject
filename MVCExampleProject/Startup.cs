@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MVCExampleProject.Data;
+using MVCExampleProject.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace MVCExampleProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient();
+
             services.AddControllersWithViews();
 
             services.AddDbContext<TodoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TodoContext")));
@@ -31,6 +34,8 @@ namespace MVCExampleProject
             services.AddTransient<ITodoRepository, TodoRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddTransient<ICatService, CatService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
